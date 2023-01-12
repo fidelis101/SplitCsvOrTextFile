@@ -29,7 +29,8 @@ namespace Splitfiles
             {
 
                 System.IO.StreamReader file = new System.IO.StreamReader(SourceFile);
-                FileStream fs = new FileStream(SourceFile, FileMode.Open, FileAccess.Read);
+                FileInfo fs = new FileInfo(SourceFile);
+
                 int SizeofEachFile = (int)Math.Ceiling((double)fs.Length / nNoofFiles);
 
                 StringBuilder sb = new StringBuilder();
@@ -76,19 +77,18 @@ namespace Splitfiles
                 int i = 1;
                 foreach (var content in fileContents)
                 {
-                    FileStream outputFile = new FileStream(Path.GetDirectoryName(SourceFile) + "\\" + baseFileName + "." +
+                    FileStream outputFile = new FileStream(Path.GetDirectoryName(SourceFile) + "\\" + "Splitted_" + baseFileName + "." +
                     i.ToString().PadLeft(5, Convert.ToChar("0")) + Extension, FileMode.Create, FileAccess.Write);
                     
                     byte[] bytes = Encoding.ASCII.GetBytes(content);
                     outputFile.Write(bytes, 0, content.Length);
-                    string packet = baseFileName + "." + i.ToString().PadLeft(3, Convert.ToChar("0")) + Extension.ToString();
+                    string packet = "Splitted_"+baseFileName + "." + i.ToString().PadLeft(3, Convert.ToChar("0")) + Extension.ToString();
                     Packets.Add(packet);
 
                     i++;
                     outputFile.Close();
                 }
 
-                fs.Close();
             }
             catch (Exception Ex)
             {
@@ -102,8 +102,9 @@ namespace Splitfiles
             bool Split = false;
             try
             {
+                FileInfo fileInfo = new FileInfo(SourceFile);
                 FileStream fs = new FileStream(SourceFile, FileMode.Open, FileAccess.Read);
-                int SizeofEachFile = (int)Math.Ceiling((double)fs.Length / nNoofFiles);
+                int SizeofEachFile = (int)Math.Ceiling((double)fileInfo.Length / nNoofFiles);
                 for (int i = 0; i < nNoofFiles; i++)
                 {
                     string baseFileName = Path.GetFileNameWithoutExtension(SourceFile);
@@ -163,7 +164,6 @@ namespace Splitfiles
                     PrevFileName = baseFileName;
                 }
                 outPutFile.Close();
-                //lblSendingResult.Text = "Files have been merged and saved at location C:\\";
             }
             catch
             {
