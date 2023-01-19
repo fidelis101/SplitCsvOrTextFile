@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SplitExcelFile": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Prime\\Desktop\\deleteme\\test.csv 6 yes yes"
+    }
+  }
+}

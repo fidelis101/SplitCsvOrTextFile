@@ -1,21 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Splitfiles;
 
-Console.WriteLine("Zenith File Splitter!");
 
-Console.WriteLine("\nPlease enter file path:");
-var filePath =Console.ReadLine();
+var filePath = args[0];
 int size = 0;
 
-Console.WriteLine("\nPlease enter file split size");
-int.TryParse(Console.ReadLine(),out size);
+int.TryParse(args[1], out size);
+var hasHeader = args[2].ToUpper().Equals("YES");
+var appendHeaderToFiles = args[3].ToUpper().Equals("YES");
 
-Console.WriteLine("\nDoc Has Header (yes/no) ?");
-var hasHeader = Console.ReadLine().ToUpper().Equals("YES");
-
-Console.WriteLine("\nAppend Header in each copy (yes/no) ?");
-var appendHeaderToFiles = Console.ReadLine().ToUpper().Equals("YES");
-
+Console.WriteLine($"\nFile Path: {filePath}");
+Console.WriteLine($"\nSplitting files into {size}");
+Console.WriteLine($"\nDoc Has Header: {hasHeader}");
+Console.WriteLine($"\nAppend Header in each copy: {appendHeaderToFiles}");
 
 var splitter = new Form();
 
