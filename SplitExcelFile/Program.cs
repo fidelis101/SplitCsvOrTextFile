@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Splitfiles;
+﻿using Splitfiles;
 
 
 var filePath = args[0];
@@ -17,4 +16,3 @@ Console.WriteLine($"\nAppend Header in each copy: {appendHeaderToFiles}");
 var splitter = new Form();
 
 splitter.SplitFileByLines(filePath, Convert.ToInt32(size),hasHeader,appendHeaderToFiles);
-//splitter.SplitFile3(@"C:\Users\Prime\Courses\ZIB_Autopay_Report_2022_07_02_211526.csv", Convert.ToInt32(4));
