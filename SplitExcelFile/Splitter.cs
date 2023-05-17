@@ -51,11 +51,13 @@ namespace Splitfiles
 
                     if (SizeofEachFile > sb.Length)
                     {
+                        if(!line.Contains("fee") && !line.Contains("FEE"))
                         sb.AppendLine(line);
                     }
                     else
                     {
-                        sb.AppendLine(line);
+                        if (!line.Contains("fee") && !line.Contains("FEE"))
+                            sb.AppendLine(line);
                         fileContents.Add(sb.ToString());
                         sb.Clear();
                         headerAppended = false;
@@ -87,5 +89,41 @@ namespace Splitfiles
             }
             return Split;
         }
+
+        public bool FilterOutFees(string SourceFile)
+        {
+            List<string> fileContents = new List<string>();
+            try
+            {
+
+                System.IO.StreamReader file = new System.IO.StreamReader(SourceFile);
+                FileInfo fs = new FileInfo(SourceFile);
+
+                StringBuilder sb = new StringBuilder();
+
+                string baseFileName = Path.GetFileNameWithoutExtension(SourceFile);
+                string Extension = Path.GetExtension(SourceFile);
+
+                FileStream outputFile = new FileStream(Path.GetDirectoryName(SourceFile) + "\\" + "Filtered_" + baseFileName + "001" +
+                Extension, FileMode.Create, FileAccess.Write);
+                StreamWriter sr = new StreamWriter(outputFile);
+
+                while ((line = file.ReadLine()) != null)
+                {
+
+                    if (!line.Contains("fee") && !line.Contains("FEE"))
+                        sr.WriteLine(line);
+                }
+
+                outputFile.Close();
+
+            }
+            catch (Exception Ex)
+            {
+                throw new ArgumentException(Ex.Message);
+            }
+            return true;
+        }
+
     }
 }

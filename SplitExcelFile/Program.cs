@@ -1,7 +1,10 @@
 ﻿using Splitfiles;
 
+Console.WriteLine("Please enter filepath: ");
+var filePath = Console.ReadLine();
 
-var filePath = args[0];
+
+//var filePath = args[0];
 int size = 0;
 
 int.TryParse(args[1], out size);
@@ -13,6 +16,9 @@ Console.WriteLine($"\nSplitting files into {size}");
 Console.WriteLine($"\nDoc Has Header: {hasHeader}");
 Console.WriteLine($"\nAppend Header in each copy: {appendHeaderToFiles}");
 
-var splitter = new Form();
+var splitter = new Splitter();
 
-splitter.SplitFileByLines(filePath, Convert.ToInt32(size),hasHeader,appendHeaderToFiles);
+splitter.FilterOutFees(filePath,"");
+//splitter.SplitFileByLines("./test.csv", Convert.ToInt32(size),hasHeader,appendHeaderToFiles);
+
+Console.ReadKey();

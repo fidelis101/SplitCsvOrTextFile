@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StreamCsvToDb": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Projects\\Glowraid\\SplitExcelFile\\SplitExcelFile\\test.csv\" \"Server=localhost;database=RPATest;User id=sa;Password=P@ssword1;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=False\""
+    }
+  }
+}
